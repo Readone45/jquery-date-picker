@@ -4,20 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Datepicker - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
 </head>
 <body>
  
-<p>Date: <input type="text" id="datepicker"></p>
+ <h3>Validasi tidak bisa memilih tanggal sebelumnya</h3>
+<p>Dari: <input type="text" id="datepickerfrom"></p>
+<p>Sampai: <input type="text" id="datepickerto"></p>
+
+<br>
+
+<h3>Validasi tidak bisa memilih tanggal setelahnya</h3>
+<p>Dari: <input type="text" id="datepickerfrom2"></p>
+<p>Sampai: <input type="text" id="datepickerto2"></p>
  
  
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+	
+	//script validasi tidak bisa memilih tanggal sebelumnya
+	
+    $( "#datepickerfrom" ).datepicker({
+		onSelect: function(selected){
+				$('#datepickerto').datepicker('option','minDate',selected);
+		}
+	});
+	
+	$( "#datepickerto" ).datepicker({
+		onSelect: function(selected){
+				$('#datepickerfrom').datepicker('option','maxDate',selected);
+		}
+	});
+	
+	//script validasi tidak bisa memilih tanggal setelahnya
+	
+	$( "#datepickerfrom2" ).datepicker({
+		onSelect: function(selected){
+				$('#datepickerto2').datepicker('option','maxDate',selected);
+		}
+	});
+	
+	$( "#datepickerto2" ).datepicker({
+		onSelect: function(selected){
+				$('#datepickerfrom2').datepicker('option','minDate',selected);
+		}
+	});
+  } );
+  </script>
 </body>
 </html>
